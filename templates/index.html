@@ -1,0 +1,688 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Herbarium</title>
+    <link rel="stylesheet" href="/static/CSS/Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <section class="home" id="home">
+        <h1>Virtual Herbarium</h1>
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+        <form class="form-container" enctype='multipart/form-data'>
+            <div class="upload-files-container">
+                <div class="drag-file-area">
+                    <span class="material-icons-outlined upload-icon"> file_upload </span>
+                    <h3 class="dynamic-message"> Drag & drop any leaf image here </h3>
+                    <label class="label"> or <span class="browse-files"> <input type="file"
+                                class="default-file-input" />
+                            <span class="browse-files-text">browse file</span> <span>from device</span> </span> </label>
+                </div>
+                <span class="cannot-upload-message"> <span class="material-icons-outlined">error</span> Please select a
+                    file
+                    first <span class="material-icons-outlined cancel-alert-button">cancel</span> </span>
+                <div class="file-block">
+                    <div class="file-info"> <span class="material-icons-outlined file-icon">description</span>
+                        <span class="file-name"> </span> | <span class="file-size"> </span>
+                    </div>
+                    <span class="material-icons remove-file-icon">delete</span>
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="popup" id="popup-1">
+                    <div class="overlay"></div>
+                    <div class="content">
+                        <div class="close-btn" onclick="togglePopup()">&times;</div>
+                        <div class="tick">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <h2>Predicted leaf is <span class="leaf">{label}</span></h2>
+                        <div class="display">
+                            <h3>Its's Botanical Name : <span class="bname">{name}</span></h3>
+                            <h3>Medicinal Benefits :</h3>
+                            <span class="benifits" style="white-space: pre-line;">{benifits}</span>
+                            <h3>Traditional Uses :</h3>
+                            <span class="uses">{uses}</span>
+                            <h3>Habitat :</h3>
+                            <span class="habitat">{habitat}</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="togglePopup()" type="button" class="predict-button"> Predict 🌿</button>
+            </div>
+        </form>
+        <a href="#details"><button class="more-details">About More Leaves☘️</button></a>
+    </section>
+
+    <section id="details">
+        <h2 class="heading">About more <span>Leaves</span></h2>
+        <p><span style="font-weight: bolder;">Hover</span> on the leaf image, and <span
+                style="font-weight: bolder;">click</span> on the icon to know more about it.</p>
+        <div class="details-container">
+            <div class="details-box">
+                <img src="/static/Aloevera.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Aloevera</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Aloevera" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Amla.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Amla</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Amla" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Amruthaballi.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Amruthaballi</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Amruthaballi"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Arali.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Arali</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Arali" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Ashoka.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Ashoka</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Ashoka" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Astma_weed.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Astma Weed</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Astma Weed" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Badipala.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Badipala</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Badipala" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Balloon_Vine.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Balloon Vine</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Balloon Vine"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Bamboo.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Bamboo</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Bamboo" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Beans.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Beans</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Beans" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Betel.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Betel</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Betel" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Bhrami.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Bhrami</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Bhrami" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Bringaraja.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Bringaraja</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Bringaraja" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Camphor.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Camphor</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Camphor" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Caricature.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Caricature</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Caricature" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Castor.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Castor</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Castor" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Catharanthus.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Catharanthus</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Catharanthus"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Chakte.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Chakte</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Chakte" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Chilly.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Chilly</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Chilly" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Citron_lime.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Citron Lime</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Citron Lime"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Coffee.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Coffee</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Coffee" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Common_rue.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Common Rue</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Common Rue" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Coriander.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Coriander</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Coriender" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Curry.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Curry</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Curry" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Doddapatre.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Doddapathre</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Doddpathre" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Drumstick.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Drumstick</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Drumstick" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Ekka.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Ekka</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Ekka" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Eucalyptus.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Eucalyptus</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Eucalyptus" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Ganigale.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Ganigale</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Ganigale" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Ganike.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Ganike</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Ganike" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Gasagase.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Gasagase</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Gasagase" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Ginger.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Ginger</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Ginger" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Globe_Amarnath.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Globe Amarnath</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Globe Amarnath"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Guava.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Guava</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Guava" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Henna.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Henna</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Henna" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Hibiscus.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Hibiscus</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Hibiscus" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Honge.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Honge</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Honge" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/insulin.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Insulin</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Insulin" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Jackfruit.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Jackfruit</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Jackfruit" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Jasmine.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Jasmine</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Jasmine" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Kamakasthuri.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Kamakasthuri</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Kamakasthuri"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <!-- <div class="details-box">
+                <img src="/static/Kambajala.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Kambajala</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Kambajala" onclick="fetchDetails(this)"></i>
+                </div>
+            </div> -->
+            <div class="details-box">
+                <img src="/static/Kasambruga.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Kasambruga</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Kasambruga" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Kepala.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Kepala</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Kepala" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Kohlrabi.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Kohlrabi</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Kohlrabi" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Lantana.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Lantana</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Lantana" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Lemon_grass.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Lemon Grass</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Lemon Grass"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Lemon.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Lemon</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Lemon" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Malabar_Nut.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Malabar Nut</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Malabar Nut"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Malabar_Spinach.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Malabar Spinach</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Malabar Spinach"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Mango.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Mango</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Mango" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Marigold.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Marigold</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Marigold" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Mint.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Mint</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Mint" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Nagadali.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Nagadali</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Nagadali" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Neem.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Neem</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Neem" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Nelavembu.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Nelavembu</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Nelavembu" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Nerale.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Nerale</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Nerale" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Nithyapushpa.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Nithyapushpa</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Nithyapushpa"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Nooni.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Nooni</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Nooni" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Onion.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Onion</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Onion" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Padri.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Padri</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Padri" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Palak.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Palak</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Palak" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Pappaya.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Papaya</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Papaya" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Parijata.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Parijatha</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Parijatha" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Pea.webp" alt="">
+                <div class="details-layer">
+                    <h4>Pea</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Pea" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Pepper.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Pepper</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Pepper" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Pomegranate.webp" alt="">
+                <div class="details-layer">
+                    <h4>Pomegranate</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Pomegranate"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Pumpkin.webp" alt="">
+                <div class="details-layer">
+                    <h4>Pumpkin</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Pumpkin" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Raddish.webp" alt="">
+                <div class="details-layer">
+                    <h4>Raddish</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Radish" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Raktachandini.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Raktachandini</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Raktachandini"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Rose.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Rose</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Rose" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/sampige.png" alt="">
+                <div class="details-layer">
+                    <h4>Sampige</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Sampige" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Sapota.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Sapota</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Sapota" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Seethaashoka.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Seethaashoka</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Seethaashoka"
+                        onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/seethapala.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Seethapala</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Seethapala" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Tamarind.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Tamarind</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Tamarind" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Taro.webp" alt="">
+                <div class="details-layer">
+                    <h4>Taro</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Taro" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Tecoma.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Tecoma</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Tecoma" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Thumbe.webp" alt="">
+                <div class="details-layer">
+                    <h4>Thumbe</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Thumbe" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Tomato.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Tomato</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Tomato" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Tulsi.jpg" alt="">
+                <div class="details-layer">
+                    <h4>Tulasi</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Tulasi" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/turmeric.png" alt="">
+                <div class="details-layer">
+                    <h4>Turmeric</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Turmeric" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+            <div class="details-box">
+                <img src="/static/Wood_sorel.jpeg" alt="">
+                <div class="details-layer">
+                    <h4>Wood Sorel</h4>
+                    <i class="fa-solid fa-up-right-from-square" data-leaf="Wood Sorel" onclick="fetchDetails(this)"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for displaying details -->
+        <div id="leafModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h4 id="leaf-name"></h4>
+                <p><strong>Botanical Name:</strong> <span id="botanical-name"></span></p>
+                <p><strong>Traditional Uses:</strong> <span id="traditional-uses"></span></p>
+                <p><strong>Medicinal Benefits:</strong> <span id="medicinal-benefits"
+                        style="white-space: pre-line;"></span></p>
+                <p><strong>Habitat:</strong> <span id="habitat"></span></p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>(to home screen) <span class="title">Virtual Herbarium<a href="#home"><i
+                        class="fa-solid fa-angles-up"></i></a></span></p>
+    </footer>
+
+    <script src="/static/JS/script.js"></script>
+</body>
+
+</html>
