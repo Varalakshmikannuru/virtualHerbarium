@@ -121,12 +121,6 @@ We welcome contributions to improve the project! Please feel free to submit pull
 
 ---
 
-## 📝 License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
 ## 📬 Contact
 
 If you have any questions or feedback, feel free to reach out:
